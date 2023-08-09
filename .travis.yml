@@ -1,9 +1,21 @@
 sudo: required
 services:
-  - docker
+  - katbin-react
 
 before_install:
-  - docker build -t asaphbinene/docker-react -f Dockerfile.dev .
+  - docker build -t asaphbinene/katbin-react-fe-web -f Dockerfile.dev .
 
 script:
-  - docker run -e CI=true asaphbinene/docker-react npm run build -- --coverage
+  - docker run -e CI=true asaphbinene/katbin-react-fe-web npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "katbin-react-fe-web"
+  env: "Katbin-react-fe-web-env"
+  bucket_name: "elasticbeanstalk-us-east-2-341223396631"
+  bucket_path: "katbin-react-fe-web"
+  on:
+    branch: main
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: "$AWS_SECRET_KEY"

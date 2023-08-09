@@ -1,4 +1,4 @@
-FROM node:alpine as katbin-builder 
+FROM node:alpine as builder 
 
 WORKDIR /app
 COPY package.json .
