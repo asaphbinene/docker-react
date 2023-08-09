@@ -1,11 +1,9 @@
 version: '3'
-services: 
+services:
   katbin-fe-web:
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     ports:
-      - "5000:3000"
-    volumes:
-      - /app/node_modules
-      - .:/app
+      - '80:80'
+    

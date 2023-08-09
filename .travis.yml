@@ -7,3 +7,15 @@ before_install:
 
 script:
   - docker run -e CI=true asaphbinene/docker-react npm run build -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-north-1"
+  app: "katbin-react-fe-web"
+  env: "katbin-react-fe-web-env"
+  bucket_name: "elasticbeanstalk-eu-north-1-341223396631"
+  bucket_path: "katbin-react-fe-web"
+  on:
+    branch: main
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: "$AWS_SECRET_KEY"
